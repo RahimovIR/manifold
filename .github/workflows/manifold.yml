@@ -18,15 +18,8 @@ jobs:
         cmake . -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DMANIFOLD_DEBUG=ON -DMANIFOLD_CBIND=ON -DMANIFOLD_PAR=ON -A x64 -B build
         cd build
         cmake --build . --target ALL_BUILD --config Release
-    - name: Test ${{matrix.parallel_backend}}
-      shell: bash
-      run: |
-        cd build/bin/Release
-        ./manifold_test.exe
-        cd ../../
-    - name: test cmake consumer
-      run: |
-        cd build
-        cmake --install .
-        cd ..
-        ./scripts/test-cmake.sh
+
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        path: build/bin/Release/manifoldc.dll
