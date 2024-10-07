@@ -5,7 +5,7 @@ on:
     branches: [ build ]
 
 jobs:
-  build_windows:
+  build_windows_par:
     timeout-minutes: 30
     runs-on: windows-2019
     steps:
@@ -22,4 +22,25 @@ jobs:
     - name: Upload build artifact
       uses: actions/upload-artifact@v3
       with:
+        name: manifoldc-win-par
+        path: build/bin/Release/manifoldc.dll
+
+  build_windows:
+    timeout-minutes: 30
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v4
+    - uses: jwlawson/actions-setup-cmake@v2
+    - uses: ilammy/msvc-dev-cmd@v1
+    - name: Build ${{matrix.parallel_backend}}
+      shell: powershell
+      run: |
+        cmake . -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DMANIFOLD_DEBUG=ON -DMANIFOLD_CBIND=ON -DMANIFOLD_PAR=OFF -A x64 -B build
+        cd build
+        cmake --build . --target ALL_BUILD --config Release
+
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: manifoldc-win
         path: build/bin/Release/manifoldc.dll
