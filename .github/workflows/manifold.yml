@@ -32,7 +32,7 @@ jobs:
     - uses: actions/checkout@v4
     - uses: jwlawson/actions-setup-cmake@v2
     - uses: ilammy/msvc-dev-cmd@v1
-    - name: Build ${{matrix.parallel_backend}}
+    - name: Build ${{matrix.parallelization}}
       shell: powershell
       run: |
         cmake . -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DMANIFOLD_DEBUG=ON -DMANIFOLD_CBIND=ON -DMANIFOLD_PAR=OFF -A x64 -B build
