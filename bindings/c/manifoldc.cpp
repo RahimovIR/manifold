@@ -349,6 +349,7 @@ ManifoldMeshGL* manifold_meshgl(void* mem, float* vert_props, size_t n_verts,
   mesh->numProp = n_props;
   mesh->vertProperties = vector_of_array(vert_props, n_verts * n_props);
   mesh->triVerts = vector_of_array(tri_verts, n_tris * 3);
+  mesh->runOriginalID = {Manifold::ReserveIDs(1)};
   return to_c(mesh);
 }
 
@@ -361,6 +362,7 @@ ManifoldMeshGL* manifold_meshgl_w_tangents(void* mem, float* vert_props,
   mesh->vertProperties = vector_of_array(vert_props, n_verts * n_props);
   mesh->triVerts = vector_of_array(tri_verts, n_tris * 3);
   mesh->halfedgeTangent = vector_of_array(halfedge_tangent, n_tris * 3 * 4);
+  mesh->runOriginalID = {Manifold::ReserveIDs(1)};
   return to_c(mesh);
 }
 
@@ -371,6 +373,7 @@ ManifoldMeshGL64* manifold_meshgl64(void* mem, double* vert_props,
   mesh->numProp = n_props;
   mesh->vertProperties = vector_of_array(vert_props, n_verts * n_props);
   mesh->triVerts = vector_of_array(tri_verts, n_tris * 3);
+  mesh->runOriginalID = {Manifold::ReserveIDs(1)};
   return to_c(mesh);
 }
 
@@ -384,6 +387,7 @@ ManifoldMeshGL64* manifold_meshgl64_w_tangents(void* mem, double* vert_props,
   mesh->vertProperties = vector_of_array(vert_props, n_verts * n_props);
   mesh->triVerts = vector_of_array(tri_verts, n_tris * 3);
   mesh->halfedgeTangent = vector_of_array(halfedge_tangent, n_tris * 3 * 4);
+  mesh->runOriginalID = {Manifold::ReserveIDs(1)};
   return to_c(mesh);
 }
 
